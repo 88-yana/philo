@@ -12,6 +12,10 @@ all: $(OBJSDIR) $(NAME)
 $(NAME): $(OBJS)
 	$(CC)  $(OBJS) $(LFLAGS) -o $(NAME)
 
+test:
+	$(MAKE)
+	./philo 10 300 400 500 600
+
 $(OBJSDIR):
 	mkdir $(shell find $(SRCSDIR) -type d | sed 's/^$(SRCSDIR)/$(OBJSDIR)/g')
 
@@ -27,4 +31,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re test

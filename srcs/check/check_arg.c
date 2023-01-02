@@ -43,7 +43,7 @@ static bool	is_int(char *str)
 		sign = *str++ - 44;
 	while (ft_isdigit(*str))
 	{
-		if (sign * ans > (201 - (int)(*str - '0')) / 10)
+		if (sign * ans > (INT_MAX - (int)(*str - '0')) / 10)
 			return (false);
 		ans = ans * 10 - (int)(*str++ - '0');
 	}
@@ -75,10 +75,15 @@ bool	check_arg(int argc, char **argv)
 		printf("args are invalid\n");
 		return (false);
 	}
-	if (argc == 6 && ft_atoi(argv[5]) == 0)
+	if (ft_atoi(argv[1]) > 200)
 	{
-		printf("can't eat\n");
+		printf("there are too many philos\n");
 		return (false);
 	}
+	// if (argc == 6 && ft_atoi(argv[5]) == 0)
+	// {
+	// 	printf("can't eat\n");
+	// 	return (false);
+	// }
 	return (true);
 }

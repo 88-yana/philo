@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <limits.h>
 # include <sys/time.h>
 # include <pthread.h>
 # include "libft.h"

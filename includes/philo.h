@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 19:00:10 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:37:29 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum e_status
 typedef struct s_fork
 {
 	pthread_mutex_t	mutex;
-	int				id;
+	int				id; //本当に必要か？
+	bool			exist; //存在しなければ取れない
 }	t_fork;
 typedef struct s_philo
 {
@@ -48,6 +49,7 @@ typedef struct s_philo
 
 typedef struct s_args
 {
+	int	num_of_philos;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	time_to_die;
@@ -56,9 +58,9 @@ typedef struct s_args
 
 typedef struct s_vars
 {
+	t_args	args;
 	t_philo	philos[MAX_PHILO];
 	t_fork	forks[MAX_PHILO];
-	t_args	args;
 }	t_vars;
 
 bool	check_arg(int argc, char **argv);

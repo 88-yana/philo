@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 19:13:04 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:16:11 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	if (check_arg(argc, argv) == false)
 		return (1);
 	init_vars(&vars, argc, argv);
+	printf("num is %d\n", vars.args.num_of_philos);
 	printf("die is %d\n", vars.args.time_to_die);
 	printf("eat is %d\n", vars.args.time_to_eat);
 	printf("sleep is %d\n", vars.args.time_to_sleep);

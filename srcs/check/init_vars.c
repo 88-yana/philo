@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 19:11:02 by hyanagim         ###   ########.fr       */
+/*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
+/*   Updated: 2023/01/04 19:09:17 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+static void	init_args(t_vars *vars, int argc, char **argv)
 {
-	t_vars	vars;
+	vars->args.time_to_die = ft_atoi(argv[2]);
+	vars->args.time_to_eat = ft_atoi(argv[3]);
+	vars->args.time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		vars->args.times_to_eat_pasta = ft_atoi(argv[5]);
+	else
+		vars->args.times_to_eat_pasta = INT_MAX;
+}
 
-	if (check_arg(argc, argv) == false)
-		return (1);
-	init_vars(&vars, argc, argv);
-	printf("die is %d\n", vars.args.time_to_die);
-	printf("eat is %d\n", vars.args.time_to_eat);
-	printf("sleep is %d\n", vars.args.time_to_sleep);
-	printf("times is %d\n", vars.args.times_to_eat_pasta);
-	printf("%s\n", "ok");
-	return (0);
+void	init_vars(t_vars *vars, int argc, char **argv)
+{
+	init_args(vars, argc, argv);
 }

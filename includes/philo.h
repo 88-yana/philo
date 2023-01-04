@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 18:46:05 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:00:10 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ typedef struct s_vars
 }	t_vars;
 
 bool	check_arg(int argc, char **argv);
+void	init_vars(t_vars *vars, int argc, char **argv);
 
 #endif

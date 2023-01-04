@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 18:07:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:48:28 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ bool	check_arg(int argc, char **argv)
 	}
 	if (argc == 6 && ft_atoi(argv[5]) == 0)
 	{
-		printf("%d 1 died\n", ft_atoi(argv[2]) + 1);
+		printf("%d 1 %s\n", ft_atoi(argv[2]) + 1, DIED_STR);
 		return (false);
 	}
 	return (true);

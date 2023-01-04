@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/01 18:42:35 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:46:05 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,46 @@
 # include "libft.h"
 
 # define MAX_PHILO 200
+# define EATING_STR "is eating"
+# define SLEEPING_STR "is sleeping"
+# define THINKING_STR "is thinking"
+# define DIED_STR "died"
+
+typedef enum e_status
+{
+	EATING_E,
+	SLEEPING_E,
+	THINKING_E
+}	t_status;
+
+typedef struct s_fork
+{
+	pthread_mutex_t	mutex;
+	int				id;
+}	t_fork;
+typedef struct s_philo
+{
+	pthread_t		thread;
+	pthread_mutex_t	mutex;
+	int				id;
+	t_fork			*left;
+	t_fork			*right;
+}	t_philo;
+
+typedef struct s_args
+{
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	time_to_die;
+	int	times_to_eat_pasta;
+}	t_args;
+
+typedef struct s_vars
+{
+	t_philo	philos[MAX_PHILO];
+	t_fork	forks[MAX_PHILO];
+	t_args	args;
+}	t_vars;
 
 bool	check_arg(int argc, char **argv);
 

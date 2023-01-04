@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 19:11:02 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:13:04 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 	printf("sleep is %d\n", vars.args.time_to_sleep);
 	printf("times is %d\n", vars.args.times_to_eat_pasta);
 	printf("%s\n", "ok");
+	
 	return (0);
 }

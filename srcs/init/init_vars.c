@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 20:21:32 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:42:54 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ static void	init_philos(t_vars *vars)
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		pthread_mutex_init(&vars->philos[i].mutex, NULL);
+		// pthread_mutex_init(&vars->philos[i].mutex, NULL);
 		vars->philos[i].id = i + 1;
+		vars->philos[i].times_to_eat_pasta = vars->args.times_to_eat_pasta;
 		vars->philos[i].left = &vars->forks[i];
 		if (i == 0)
 			vars->philos[i].right = &vars->forks[vars->args.num_of_philos - 1];

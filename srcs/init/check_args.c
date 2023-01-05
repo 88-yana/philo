@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_arg.c                                        :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 18:48:28 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:42:37 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,20 @@ static bool	is_valid_number(char **array, int i)
 	return (true);
 }
 
-bool	check_arg(int argc, char **argv)
+static void	cannot_eat(int num_of_philos, int time_to_die)
+{
+	int	i;
+
+	i = 0;
+	while (i < num_of_philos)
+	{
+		printf("%d %d %s\n", 0, i + 1, THINKING_STR);
+		i++;
+	}
+	printf("%d %d %s\n", time_to_die + 1, 1, DIED_STR);
+}
+
+bool	check_args(int argc, char **argv)
 {
 	if (argc < 5 || 6 < argc)
 	{
@@ -82,7 +95,7 @@ bool	check_arg(int argc, char **argv)
 	}
 	if (argc == 6 && ft_atoi(argv[5]) == 0)
 	{
-		printf("%d 1 %s\n", ft_atoi(argv[2]) + 1, DIED_STR);
+		cannot_eat(ft_atoi(argv[1]), ft_atoi(argv[2]));
 		return (false);
 	}
 	return (true);

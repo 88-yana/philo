@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 19:37:29 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:42:49 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	pthread_t		thread;
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	mutex; //いらないかも
 	int				id;
+	int				times_to_eat_pasta;
 	t_fork			*left;
 	t_fork			*right;
 }	t_philo;
@@ -63,7 +64,7 @@ typedef struct s_vars
 	t_fork	forks[MAX_PHILO];
 }	t_vars;
 
-bool	check_arg(int argc, char **argv);
+bool	check_args(int argc, char **argv);
 void	init_vars(t_vars *vars, int argc, char **argv);
 
 #endif

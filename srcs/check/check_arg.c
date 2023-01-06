@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/01 18:34:33 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:07:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ bool	check_arg(int argc, char **argv)
 		printf("args are invalid\n");
 		return (false);
 	}
-	if (ft_atoi(argv[1]) > 200)
+	if (ft_atoi(argv[1]) < 1 || 200 < ft_atoi(argv[1]))
 	{
-		printf("there are too many philos\n");
+		printf("there are too many philos or less than 1\n");
 		return (false);
 	}
-	// if (argc == 6 && ft_atoi(argv[5]) == 0)
-	// {
-	// 	printf("can't eat\n");
-	// 	return (false);
-	// }
+	if (argc == 6 && ft_atoi(argv[5]) == 0)
+	{
+		printf("%d 1 died\n", ft_atoi(argv[2]) + 1);
+		return (false);
+	}
 	return (true);
 }

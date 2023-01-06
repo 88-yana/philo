@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra  -I ./includes/
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -I ./includes/
 # LFLAGS = -lpthread
 SRCSDIR = srcs
 OBJSDIR = objs

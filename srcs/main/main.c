@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/05 23:42:26 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:36:22 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	create_philos_threads(&vars);
 	create_monitor_thread(&vars);
 	join_threads(&vars);
+	destroy_mutexes(&vars);
 	printf("num is %d\n", vars.args.num_of_philos);
 	printf("die is %d\n", vars.args.time_to_die);
 	printf("eat is %d\n", vars.args.time_to_eat);

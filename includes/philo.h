@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 04:21:25 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 05:18:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_philo
 
 typedef struct s_monitor
 {
-	pthread_t		thread;
+	pthread_t		thd;
 }	t_monitor;
 typedef struct s_args
 {
@@ -89,9 +89,10 @@ void	*philo_act(void *arg);
 int		get_timestamp(int start_time);
 void	stop_while_eating(int timestamp, t_philo *philo, int time_to_do);
 
-void	look_mutex(t_philo *philo, t_vars *vars, t_status type);
-void	unlook_mutex(t_philo *philo, t_vars *vars, t_status type);
+void	lock_mutex(t_philo *philo, t_vars *vars, t_status type);
+void	unlock_mutex(t_philo *philo, t_vars *vars, t_status type);
 void	create_philos_threads(t_vars *vars);
+void	create_monitor_thread(t_vars *vars);
 void	join_threads(t_vars *vars);
 void	destroy_mutexes(t_vars *vars);
 

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 04:26:19 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:49:13 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static bool	eating(t_philo *philo)
 		return (false);
 	}
 	go_on = true;
-	look_mutex(philo, philo->vars, EATING_E);
+	lock_mutex(philo, philo->vars, EATING_E);
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, EATING_E);
-	unlook_mutex(philo, philo->vars, NONE);
+	unlock_mutex(philo, philo->vars, NONE);
 	if (go_on)
 	{
 		philo->last_eat_time = timestamp;
 		philo->times_to_eat_pasta--;
 		stop_while_eating(timestamp, philo, philo->vars->args.time_to_eat);
 	}
-	unlook_mutex(philo, philo->vars, EATING_E);
+	unlock_mutex(philo, philo->vars, EATING_E);
 	philo->status = SLEEPING_E;
 	return (go_on);
 }
@@ -45,10 +45,10 @@ static bool	sleeping(t_philo *philo)
 	int		timestamp;
 
 	go_on = true;
-	look_mutex(philo, philo->vars, NONE);
+	lock_mutex(philo, philo->vars, NONE);
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, SLEEPING_E);
-	unlook_mutex(philo, philo->vars, NONE);
+	unlock_mutex(philo, philo->vars, NONE);
 	if (go_on)
 		stop_while_eating(timestamp, philo, philo->vars->args.time_to_sleep);
 	philo->status = THINKING_E;
@@ -61,10 +61,10 @@ static bool	thinking(t_philo *philo)
 	int		timestamp;
 
 	go_on = true;
-	look_mutex(philo, philo->vars, NONE);
+	lock_mutex(philo, philo->vars, NONE);
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, THINKING_E);
-	unlook_mutex(philo, philo->vars, NONE);
+	unlock_mutex(philo, philo->vars, NONE);
 	philo->status = EATING_E;
 	return (go_on);
 }

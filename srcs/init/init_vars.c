@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/06 17:54:31 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:05:36 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	init_philos(t_vars *vars)
 		vars->philos[i].times_to_eat_pasta = vars->args.times_to_eat_pasta;
 		vars->philos[i].state = EATING_E;
 		vars->philos[i].left = &vars->forks[i];
+		vars->philos[i].vars = vars;
 		if (i == 0)
 			vars->philos[i].right = &vars->forks[vars->args.num_of_philos - 1];
 		else

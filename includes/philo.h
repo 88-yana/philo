@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/06 19:38:31 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:51:05 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "libft.h"
 
 # define MAX_PHILO 200
-# define TAKEN_A_FORK "has taken a fork"
+# define TAKEN_A_FORK_STR "has taken a fork"
 # define EATING_STR "is eating"
 # define SLEEPING_STR "is sleeping"
 # define THINKING_STR "is thinking"
@@ -54,7 +54,7 @@ typedef struct s_philo
 typedef struct s_monitor
 {
 	pthread_t		thread;
-	pthread_mutex_t	alive;
+	pthread_mutex_t	mtx_stop;
 }	t_monitor;
 typedef struct s_args
 {
@@ -67,12 +67,13 @@ typedef struct s_args
 
 typedef struct s_vars
 {
-	t_args		args;
-	t_philo		philos[MAX_PHILO];
-	t_monitor	monitor;
-	t_fork		forks[MAX_PHILO];
-	int			start_time;
-	bool		go_on;
+	t_args			args;
+	t_philo			philos[MAX_PHILO];
+	t_monitor		monitor;
+	t_fork			forks[MAX_PHILO];
+	pthread_mutex_t	write;
+	int				start_time;
+	bool			stop;
 }	t_vars;
 
 bool	check_args(int argc, char **argv);

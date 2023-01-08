@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 02:54:24 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:26:19 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static bool	eating(t_philo *philo)
 	if (go_on)
 	{
 		philo->last_eat_time = timestamp;
+		philo->times_to_eat_pasta--;
 		stop_while_eating(timestamp, philo, philo->vars->args.time_to_eat);
 	}
 	unlook_mutex(philo, philo->vars, EATING_E);

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 03:50:39 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:21:25 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,10 @@ typedef enum e_status
 typedef struct s_fork
 {
 	pthread_mutex_t	mtx;
-	int				id; //本当に必要か？
-	bool			exist; //存在しなければ取れない//1のときしか考えない
 }	t_fork;
 typedef struct s_philo
 {
-	pthread_t		thread;
+	pthread_t		thd;
 	int				id;
 	int				times_to_eat_pasta;
 	int				last_eat_time;
@@ -82,16 +80,19 @@ struct s_vars
 
 bool	check_args(int argc, char **argv);
 void	init_vars(t_vars *vars, int argc, char **argv);
+
 bool	is_dead(int timestamp, int last_eat_time, int time_to_die);
 bool	can_eat(t_philo *philo);
 bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
+void	*monitor_act(void *arg);
+void	*philo_act(void *arg);
+int		get_timestamp(int start_time);
+void	stop_while_eating(int timestamp, t_philo *philo, int time_to_do);
+
 void	look_mutex(t_philo *philo, t_vars *vars, t_status type);
 void	unlook_mutex(t_philo *philo, t_vars *vars, t_status type);
-void	*philo_act(void *arg);
 void	create_philos_threads(t_vars *vars);
 void	join_threads(t_vars *vars);
 void	destroy_mutexes(t_vars *vars);
-int		get_timestamp(int start_time);
-void	stop_while_eating(int timestamp, t_philo *philo, int time_to_do);
 
 #endif

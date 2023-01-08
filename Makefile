@@ -1,6 +1,5 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -I ./includes/
-# LFLAGS = -lpthread
 SRCSDIR = srcs
 OBJSDIR = objs
 SRCS = $(shell find $(SRCSDIR) -type f -name *.c)
@@ -14,7 +13,7 @@ test:
 	./test.sh
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LFLAGS) -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 
 
 $(OBJSDIR):

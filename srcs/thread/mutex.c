@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:40:27 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 02:32:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:07:34 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	destroy_mutexes(t_vars *vars)
 		pthread_mutex_destroy(&vars->forks[i].mtx);
 		i++;
 	}
+	pthread_mutex_destroy(&vars->mtx_write);
 	pthread_mutex_destroy(&vars->mtx_stop);
 }

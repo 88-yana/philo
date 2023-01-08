@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:45:36 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 02:31:58 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:22:13 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	create_philos_threads(t_vars *vars)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		pthread_create(&vars->philos[i].thread, NULL, philo_act, &vars->philos[i]);
+		pthread_create(&vars->philos[i].thd, NULL, philo_act, &vars->philos[i]);
 		i++;
 	}
 }
@@ -36,7 +36,7 @@ void	join_threads(t_vars *vars)
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		pthread_join(vars->philos[i].thread, NULL);
+		pthread_join(vars->philos[i].thd, NULL);
 		i++;
 	}
 	pthread_join(vars->monitor.thread, NULL);

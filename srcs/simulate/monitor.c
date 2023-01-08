@@ -6,7 +6,14 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 00:41:08 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:07:59 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philo.h"
+
+// void	*monitor_act(void *arg)
+// {
+
+// 	return (NULL);
+// }

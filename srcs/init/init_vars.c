@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 03:52:43 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 04:15:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	init_forks(t_vars *vars)
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		vars->forks[i].exist = true;
 		pthread_mutex_init(&vars->forks[i].mtx, NULL);
 		i++;
 	}

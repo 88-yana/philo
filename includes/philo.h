@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/08 22:51:05 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 03:50:39 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@
 # include <stdio.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <unistd.h>
 # include <pthread.h>
 # include "libft.h"
 
 # define MAX_PHILO 200
+# define NONE -1
 # define TAKEN_A_FORK_STR "has taken a fork"
 # define EATING_STR "is eating"
 # define SLEEPING_STR "is sleeping"
 # define THINKING_STR "is thinking"
 # define DIED_STR "died"
+
+typedef struct s_vars	t_vars;
 
 typedef enum e_status
 {
@@ -35,17 +39,17 @@ typedef enum e_status
 
 typedef struct s_fork
 {
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	mtx;
 	int				id; //本当に必要か？
 	bool			exist; //存在しなければ取れない//1のときしか考えない
 }	t_fork;
 typedef struct s_philo
 {
 	pthread_t		thread;
-	pthread_mutex_t	mutex; //いらないかも
 	int				id;
 	int				times_to_eat_pasta;
-	t_status		state;
+	int				last_eat_time;
+	t_status		status;
 	t_fork			*left;
 	t_fork			*right;
 	t_vars			*vars;
@@ -54,7 +58,6 @@ typedef struct s_philo
 typedef struct s_monitor
 {
 	pthread_t		thread;
-	pthread_mutex_t	mtx_stop;
 }	t_monitor;
 typedef struct s_args
 {
@@ -65,18 +68,30 @@ typedef struct s_args
 	int	times_to_eat_pasta;
 }	t_args;
 
-typedef struct s_vars
+struct s_vars
 {
 	t_args			args;
 	t_philo			philos[MAX_PHILO];
-	t_monitor		monitor;
 	t_fork			forks[MAX_PHILO];
-	pthread_mutex_t	write;
+	t_monitor		monitor;
 	int				start_time;
 	bool			stop;
-}	t_vars;
+	pthread_mutex_t	mtx_write;
+	pthread_mutex_t	mtx_stop;
+};
 
 bool	check_args(int argc, char **argv);
 void	init_vars(t_vars *vars, int argc, char **argv);
+bool	is_dead(int timestamp, int last_eat_time, int time_to_die);
+bool	can_eat(t_philo *philo);
+bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
+void	look_mutex(t_philo *philo, t_vars *vars, t_status type);
+void	unlook_mutex(t_philo *philo, t_vars *vars, t_status type);
+void	*philo_act(void *arg);
+void	create_philos_threads(t_vars *vars);
+void	join_threads(t_vars *vars);
+void	destroy_mutexes(t_vars *vars);
+int		get_timestamp(int start_time);
+void	stop_while_eating(int timestamp, t_philo *philo, int time_to_do);
 
 #endif

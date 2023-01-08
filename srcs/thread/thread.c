@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:45:36 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/06 17:39:06 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 02:31:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	create_philos_threads(t_vars *vars)
 	}
 }
 
-void	create_monitor_thread(t_vars *vars)
-{
-	pthread_create(&vars->monitor.thread, NULL, monitor_act, &vars->monitor);
-	pthread_mutex_init(&vars->monitor.alive, NULL);
-}
+// void	create_monitor_thread(t_vars *vars)
+// {
+// 	pthread_create(&vars->monitor.thread, NULL, monitor_act, &vars->monitor);
+// }
 
 void	join_threads(t_vars *vars)
 {
@@ -41,17 +40,4 @@ void	join_threads(t_vars *vars)
 		i++;
 	}
 	pthread_join(vars->monitor.thread, NULL);
-}
-
-void	destroy_mutexes(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	while (i < vars->args.num_of_philos)
-	{
-		pthread_mutex_destroy(&vars->forks[i].mutex);
-		i++;
-	}
-	pthread_mutex_destroy(&vars->monitor.alive);
 }

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/08 22:05:36 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 03:52:43 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	init_forks(t_vars *vars)
 	while (i < vars->args.num_of_philos)
 	{
 		vars->forks[i].exist = true;
-		pthread_mutex_init(&vars->forks[i].mutex, NULL);
+		pthread_mutex_init(&vars->forks[i].mtx, NULL);
 		i++;
 	}
 }
@@ -44,23 +44,33 @@ static void	init_philos(t_vars *vars)
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		// pthread_mutex_init(&vars->philos[i].mutex, NULL);
 		vars->philos[i].id = i + 1;
 		vars->philos[i].times_to_eat_pasta = vars->args.times_to_eat_pasta;
-		vars->philos[i].state = EATING_E;
+		vars->philos[i].last_eat_time = 0;
+		if (vars->philos[i].id % 2 == 1)
+			vars->philos[i].status = EATING_E;
+		else
+			vars->philos[i].status = THINKING_E;
 		vars->philos[i].left = &vars->forks[i];
-		vars->philos[i].vars = vars;
 		if (i == 0)
 			vars->philos[i].right = &vars->forks[vars->args.num_of_philos - 1];
 		else
 			vars->philos[i].right = &vars->forks[i - 1];
+		vars->philos[i].vars = vars;
 		i++;
 	}
 }
 
 void	init_vars(t_vars *vars, int argc, char **argv)
 {
+	struct timeval	now_time;
+
 	init_args(vars, argc, argv);
 	init_forks(vars);
 	init_philos(vars);
+	pthread_mutex_init(&vars->mtx_write, NULL);
+	pthread_mutex_init(&vars->mtx_stop, NULL);
+	gettimeofday(&now_time, NULL);
+	vars->start_time = 1000 * now_time.tv_sec + now_time.tv_usec / 1000;
+	vars->stop = false;
 }

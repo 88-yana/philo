@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/08 22:58:13 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 02:54:24 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,58 @@
 
 static bool	eating(t_philo *philo)
 {
-	int		go_on;
+	bool	go_on;
 	int		timestamp;
-	t_vars	*vars;
 
 	if (philo->left == philo->right)
 	{
-		write_action(timestamp, philo->id, TAKEN_A_FORK_STR);
+		timestamp = get_timestamp(philo->vars->start_time);
+		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 		return (false);
 	}
-	vars = philo->vars;
 	go_on = true;
-	// if (philo->left == philo->right) //philoが一人のとき
-	pthread_mutex_look(philo->left);
-	pthread_mutex_look(philo->right);
-	pthread_mutex_look(&vars->monitor.mtx_stop);
-	pthread_mutex_look(&vars->write);
-	timestamp = get_timestamp();
-	if (vars->stop)
-		go_on = false;
-	else if (is_dead(vars->args.time_to_die, timestamp))
+	look_mutex(philo, philo->vars, EATING_E);
+	timestamp = get_timestamp(philo->vars->start_time);
+	go_on = log_manager(timestamp, philo, philo->vars, EATING_E);
+	unlook_mutex(philo, philo->vars, NONE);
+	if (go_on)
 	{
-		vars->stop = true;
-		write_action(timestamp, philo->id, DIED_STR);
-		go_on = false;
+		philo->last_eat_time = timestamp;
+		stop_while_eating(timestamp, philo, philo->vars->args.time_to_eat);
 	}
-	// else if (cnt_eat_manager()) //どっかのphiloがmaxのeatに達していたら，というif文が必要なのか？
-	// {
-	// 	go_on = false;
-	// }
-	else
-	{
-		write_action(timestamp, philo->id, TAKEN_A_FORK_STR);
-		write_action(timestamp, philo->id, TAKEN_A_FORK_STR);
-		write_action(timestamp, philo->id, EATING_STR);
-	}
-	pthread_mutex_unlook(&vars->write);
-	pthread_mutex_unlook(&vars->monitor.mtx_stop);
-	pthread_mutex_unlook(philo->left);
-	pthread_mutex_unlook(philo->right);
-	stop_while_eating(vars->start_time + timestamp + vars->args.time_to_eat);
+	unlook_mutex(philo, philo->vars, EATING_E);
+	philo->status = SLEEPING_E;
 	return (go_on);
 }
 
 static bool	sleeping(t_philo *philo)
 {
-	return (true);
+	bool	go_on;
+	int		timestamp;
+
+	go_on = true;
+	look_mutex(philo, philo->vars, NONE);
+	timestamp = get_timestamp(philo->vars->start_time);
+	go_on = log_manager(timestamp, philo, philo->vars, SLEEPING_E);
+	unlook_mutex(philo, philo->vars, NONE);
+	if (go_on)
+		stop_while_eating(timestamp, philo, philo->vars->args.time_to_sleep);
+	philo->status = THINKING_E;
+	return (go_on);
 }
 
 static bool	thinking(t_philo *philo)
 {
-	return (true);
+	bool	go_on;
+	int		timestamp;
+
+	go_on = true;
+	look_mutex(philo, philo->vars, NONE);
+	timestamp = get_timestamp(philo->vars->start_time);
+	go_on = log_manager(timestamp, philo, philo->vars, THINKING_E);
+	unlook_mutex(philo, philo->vars, NONE);
+	philo->status = EATING_E;
+	return (go_on);
 }
 
 void	*philo_act(void *arg)
@@ -73,16 +74,16 @@ void	*philo_act(void *arg)
 	bool	go_on;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 == 1)
+	if (philo->id % 2 == 0)
 		usleep(100);
 	go_on = true;
 	while (go_on && can_eat(philo))
 	{
-		if (philo->state == EATING_E)
+		if (philo->status == EATING_E)
 			go_on = eating(philo);
-		else if (philo->state == SLEEPING_E)
+		else if (philo->status == SLEEPING_E)
 			go_on = sleeping(philo);
-		else if (philo->state == THINKING_E)
+		else if (philo->status == THINKING_E)
 			go_on = thinking(philo);
 	}
 	return (NULL);

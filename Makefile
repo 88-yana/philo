@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -I ./includes/
+CFLAGS = -Wall -Werror -Wextra -I ./includes/
 # LFLAGS = -lpthread
 SRCSDIR = srcs
 OBJSDIR = objs
@@ -14,7 +14,7 @@ test:
 	./test.sh
 
 $(NAME): $(OBJS)
-	$(CC)  $(OBJS) $(LFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(LFLAGS) -o $(NAME)
 
 
 $(OBJSDIR):

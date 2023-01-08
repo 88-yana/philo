@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/05 23:42:37 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 03:06:59 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	is_number(char *str)
 	if (str == NULL)
 		return (false);
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '+')
 		i++;
 	while (i < ft_strlen(str))
 	{
@@ -35,7 +35,7 @@ static bool	is_int(char *str)
 	int	ans;
 	int	sign;
 
-	if (str == NULL || *str == '-')
+	if (str == NULL)
 		return (false);
 	ans = 0;
 	sign = -1;

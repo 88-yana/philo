@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_arg.c                                        :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/04 18:07:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:40:04 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	is_number(char *str)
 	if (str == NULL)
 		return (false);
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '+')
 		i++;
 	while (i < ft_strlen(str))
 	{
@@ -35,7 +35,7 @@ static bool	is_int(char *str)
 	int	ans;
 	int	sign;
 
-	if (str == NULL || *str == '-')
+	if (str == NULL)
 		return (false);
 	ans = 0;
 	sign = -1;
@@ -63,7 +63,7 @@ static bool	is_valid_number(char **array, int i)
 	return (true);
 }
 
-bool	check_arg(int argc, char **argv)
+bool	check_args(int argc, char **argv)
 {
 	if (argc < 5 || 6 < argc)
 	{
@@ -78,11 +78,6 @@ bool	check_arg(int argc, char **argv)
 	if (ft_atoi(argv[1]) < 1 || 200 < ft_atoi(argv[1]))
 	{
 		printf("there are too many philos or less than 1\n");
-		return (false);
-	}
-	if (argc == 6 && ft_atoi(argv[5]) == 0)
-	{
-		printf("%d 1 died\n", ft_atoi(argv[2]) + 1);
 		return (false);
 	}
 	return (true);

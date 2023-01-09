@@ -6,14 +6,14 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 05:29:44 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:34:50 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "string.h"
 
-void	create_philos_threads(t_vars *vars)
+void	create_threads(t_vars *vars)
 {
 	int		i;
 

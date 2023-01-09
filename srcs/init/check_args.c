@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 03:06:59 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:40:04 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,6 @@ static bool	is_valid_number(char **array, int i)
 	return (true);
 }
 
-static void	cannot_eat(int num_of_philos, int time_to_die)
-{
-	int	i;
-
-	i = 0;
-	while (i < num_of_philos)
-	{
-		printf("%d %d %s\n", 0, i + 1, THINKING_STR);
-		i++;
-	}
-	printf("%d %d %s\n", time_to_die + 1, 1, DIED_STR);
-}
-
 bool	check_args(int argc, char **argv)
 {
 	if (argc < 5 || 6 < argc)
@@ -91,11 +78,6 @@ bool	check_args(int argc, char **argv)
 	if (ft_atoi(argv[1]) < 1 || 200 < ft_atoi(argv[1]))
 	{
 		printf("there are too many philos or less than 1\n");
-		return (false);
-	}
-	if (argc == 6 && ft_atoi(argv[5]) == 0)
-	{
-		cannot_eat(ft_atoi(argv[1]), ft_atoi(argv[2]));
 		return (false);
 	}
 	return (true);

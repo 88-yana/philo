@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 04:15:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:38:47 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static void	init_philos(t_vars *vars)
 		vars->philos[i].id = i + 1;
 		vars->philos[i].times_to_eat_pasta = vars->args.times_to_eat_pasta;
 		vars->philos[i].last_eat_time = 0;
-		if (vars->philos[i].id % 2 == 1)
+		if (vars->args.times_to_eat_pasta == 0)
+			vars->philos[i].status = THINKING_E;
+		else if (vars->philos[i].id % 2 == 1)
 			vars->philos[i].status = EATING_E;
 		else
 			vars->philos[i].status = THINKING_E;

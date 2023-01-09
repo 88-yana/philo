@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 18:07:07 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:50:52 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 static bool	find_death(t_vars *vars, t_philo *philo)
 {
 	int	timestamp;
+	int	time;
 
 	if (vars->stop)
 		return (true);
+	(void) philo;
 	timestamp = get_timestamp(vars->start_time);
-	if (timestamp - philo->last_eat_time > vars->args.time_to_die)
+	time = philo->last_eat_time;
+	if (timestamp > vars->args.time_to_die + philo->last_eat_time)
+		;
 	{
 		if (vars->stop)
 			return (true);
@@ -40,7 +44,8 @@ static bool	death_detector(t_vars *vars)
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		lock_mutex(&vars->philos[i], vars, NONE);
+		pthread_mutex_lock(&vars->mtx_stop);
+		pthread_mutex_lock(&vars->mtx_write);
 		if (vars->stop || find_death(vars, &vars->philos[i]))
 		{
 			go_on = false;
@@ -48,7 +53,8 @@ static bool	death_detector(t_vars *vars)
 			pthread_mutex_unlock(&vars->mtx_write);
 			return (false);
 		}
-		unlock_mutex(&vars->philos[i], vars, NONE);
+		pthread_mutex_unlock(&vars->mtx_stop);
+		pthread_mutex_unlock(&vars->mtx_write);
 		i++;
 	}
 	return (true);

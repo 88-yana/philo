@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 16:35:24 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:49:38 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,30 @@ static bool	eating(t_philo *philo)
 	int		timestamp;
 
 	go_on = true;
-	lock_mutex(philo, philo->vars, EATING_E);
+	// lock_mutex(philo, philo->vars, EATING_E);
+	pthread_mutex_lock(&philo->left->mtx);
+	pthread_mutex_lock(&philo->right->mtx);
+	pthread_mutex_lock(&philo->vars->mtx_stop);
+	pthread_mutex_lock(&philo->vars->mtx_write);
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, EATING_E);
-	unlock_mutex(philo, philo->vars, NONE);
+	// unlock_mutex(philo, philo->vars, NONE);
 	if (go_on)
 	{
 		philo->last_eat_time = timestamp;
 		philo->times_to_eat_pasta--;
+		pthread_mutex_unlock(&philo->vars->mtx_stop);
+		pthread_mutex_unlock(&philo->vars->mtx_write);
 		stop_while_eating(timestamp, philo, philo->vars->args.time_to_eat);
 	}
-	unlock_mutex(philo, philo->vars, EATING_E);
+	else
+	{
+		pthread_mutex_unlock(&philo->vars->mtx_stop);
+		pthread_mutex_unlock(&philo->vars->mtx_write);
+	}
+	// unlock_mutex(philo, philo->vars, EATING_E);
+	pthread_mutex_unlock(&philo->left->mtx);
+	pthread_mutex_unlock(&philo->right->mtx);
 	philo->status = SLEEPING_E;
 	return (go_on);
 }

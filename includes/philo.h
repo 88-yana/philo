@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 16:36:47 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:36:24 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_philo
 typedef struct s_monitor
 {
 	pthread_t		thd;
+	t_vars			*vars;
 }	t_monitor;
 typedef struct s_args
 {

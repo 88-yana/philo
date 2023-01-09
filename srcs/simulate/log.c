@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 05:30:18 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:04:30 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 	else if (is_dead(timestamp, philo->last_eat_time, vars->args.time_to_die))
 	{
 		vars->stop = true;
+		usleep(5000);
 		printf("%d %d %s\n", timestamp, philo->id, DIED_STR);
 		return (false);
 	}

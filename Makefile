@@ -2,15 +2,22 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -I ./includes/
 SRCSDIR = srcs
 OBJSDIR = objs
-SRCS = $(shell find $(SRCSDIR) -type f -name *.c)
+SRCS = srcs/init/check_args.c \
+	srcs/init/init_vars.c \
+	srcs/lib/ft_atoi.c \
+	srcs/lib/ft_isdigit.c \
+	srcs/lib/ft_strlen.c \
+	srcs/main/main.c \
+	srcs/simulate/log.c \
+	srcs/simulate/monitor.c \
+	srcs/simulate/philo.c \
+	srcs/simulate/time.c \
+	srcs/simulate/utils.c
+
 OBJS = $(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)
 NAME = philo
 
 all: $(OBJSDIR) $(NAME)
-
-test:
-	$(MAKE)
-	./test.sh
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
@@ -31,5 +38,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all clean fclean re test
+.PHONY : all clean fclean re
 

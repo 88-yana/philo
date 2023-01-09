@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 18:04:30 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:15:41 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 		printf("%d %d %s\n", timestamp, philo->id, SLEEPING_STR);
 	else if (type == THINKING_E)
 		printf("%d %d %s\n", timestamp, philo->id, THINKING_STR);
+	(void)vars;
+	(void)timestamp;
+	(void)philo;
+	(void)type;
 	return (true);
 }
-
-	// else if (cnt_eat_manager()) //どっかのphiloがmaxのeatに達していたら，というif文が必要なのか？
-	// {
-	// 	go_on = false;
-	// }

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 19:40:22 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:04:44 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,3 @@ int	main(int argc, char **argv)
 	destroy_mutexes(&vars);
 	return (0);
 }
-
-	// printf("num is %d\n", vars.args.num_of_philos);
-	// printf("die is %d\n", vars.args.time_to_die);
-	// printf("eat is %d\n", vars.args.time_to_eat);
-	// printf("sleep is %d\n", vars.args.time_to_sleep);
-	// printf("times is %d\n", vars.args.times_to_eat_pasta);
-	// printf("%s\n", "ok");

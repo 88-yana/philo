@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 19:50:52 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:01:01 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static bool	find_death(t_vars *vars, t_philo *philo)
 	timestamp = get_timestamp(vars->start_time);
 	time = philo->last_eat_time;
 	if (timestamp > vars->args.time_to_die + philo->last_eat_time)
-		;
 	{
 		if (vars->stop)
 			return (true);

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 20:04:56 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 22:28:25 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,43 +37,36 @@ typedef enum e_status
 	THINKING_E
 }	t_status;
 
-typedef struct s_fork
-{
-	pthread_mutex_t	mtx;
-}	t_fork;
 typedef struct s_philo
 {
 	pthread_t		thd;
 	int				id;
-	int				times_to_eat_pasta;
+	int				max_eat;
 	int				last_eat_time;
 	t_status		status;
-	t_fork			*left;
-	t_fork			*right;
+	pthread_mutex_t	*left;
+	pthread_mutex_t	*right;
 	t_vars			*vars;
 }	t_philo;
 
-typedef struct s_monitor
-{
-	pthread_t		thd;
-}	t_monitor;
 typedef struct s_args
 {
 	int	num_of_philos;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	time_to_die;
-	int	times_to_eat_pasta;
+	int	max_eat;
 }	t_args;
 
 struct s_vars
 {
 	t_args			args;
 	t_philo			philos[MAX_PHILO];
-	t_fork			forks[MAX_PHILO];
-	t_monitor		monitor;
 	int				start_time;
 	bool			stop;
+	pthread_t		monitor;
+	pthread_mutex_t	mtx_forks[MAX_PHILO];
+	pthread_mutex_t	mtx_time;
 	pthread_mutex_t	mtx_write;
 	pthread_mutex_t	mtx_stop;
 };

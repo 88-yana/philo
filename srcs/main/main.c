@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 20:04:44 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 21:54:51 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	create_threads(t_vars *vars)
 		pthread_create(&vars->philos[i].thd, NULL, philo_act, &vars->philos[i]);
 		i++;
 	}
-	pthread_create(&vars->monitor.thd, NULL, monitor_act, vars);
+	pthread_create(&vars->monitor, NULL, monitor_act, vars);
 }
 
 void	join_threads(t_vars *vars)
@@ -36,7 +36,7 @@ void	join_threads(t_vars *vars)
 		pthread_join(vars->philos[i].thd, NULL);
 		i++;
 	}
-	pthread_join(vars->monitor.thd, NULL);
+	pthread_join(vars->monitor, NULL);
 }
 
 void	destroy_mutexes(t_vars *vars)
@@ -46,11 +46,12 @@ void	destroy_mutexes(t_vars *vars)
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
-		pthread_mutex_destroy(&vars->forks[i].mtx);
+		pthread_mutex_destroy(&vars->mtx_forks[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&vars->mtx_write);
 	pthread_mutex_destroy(&vars->mtx_stop);
+	pthread_mutex_destroy(&vars->mtx_time);
 }
 
 int	main(int argc, char **argv)

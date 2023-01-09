@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 16:34:50 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:41:16 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	memset(&vars, 0, sizeof(t_vars));
 	if (check_args(argc, argv) == false)
 		return (1);
 	init_vars(&vars, argc, argv);

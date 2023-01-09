@@ -37,17 +37,14 @@ static bool	find_death(t_vars *vars, t_philo *philo)
 
 static bool	death_detector(t_vars *vars)
 {
-	int		i;
-	bool	go_on;
+	int	i;
 
-	go_on = true;
 	i = 0;
 	while (i < vars->args.num_of_philos)
 	{
 		lock_mutex(NULL, vars, NONE);
 		if (vars->stop || find_death(vars, &vars->philos[i]))
 		{
-			go_on = false;
 			unlock_mutex(NULL, vars, NONE);
 			return (false);
 		}

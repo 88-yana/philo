@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 22:39:17 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:58:45 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static bool	eating(t_philo *philo)
 
 	go_on = true;
 	lock_mutex(philo, philo->vars, EATING_E);
+	lock_mutex(NULL, philo->vars, STOP_WRITE);
 	timestamp = get_timestamp(philo->vars->start_time);
-	lock_mutex(NULL, philo->vars, NONE);
 	go_on = log_manager(timestamp, philo, philo->vars, EATING_E);
-	unlock_mutex(NULL, philo->vars, NONE);
+	unlock_mutex(NULL, philo->vars, STOP_WRITE);
 	if (go_on)
 	{
 		pthread_mutex_lock(&philo->vars->mtx_time);
@@ -42,10 +42,10 @@ static bool	sleeping(t_philo *philo)
 	int		timestamp;
 
 	go_on = true;
-	lock_mutex(NULL, philo->vars, NONE);
+	lock_mutex(NULL, philo->vars, STOP_WRITE);
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, SLEEPING_E);
-	unlock_mutex(NULL, philo->vars, NONE);
+	unlock_mutex(NULL, philo->vars, STOP_WRITE);
 	if (go_on)
 		stop_while_eating(timestamp, philo, philo->vars->args.time_to_sleep);
 	philo->status = THINKING_E;
@@ -58,10 +58,10 @@ static bool	thinking(t_philo *philo)
 	int		timestamp;
 
 	go_on = true;
-	lock_mutex(NULL, philo->vars, NONE);
+	lock_mutex(NULL, philo->vars, STOP_WRITE);
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, THINKING_E);
-	unlock_mutex(NULL, philo->vars, NONE);
+	unlock_mutex(NULL, philo->vars, STOP_WRITE);
 	philo->status = EATING_E;
 	return (go_on);
 }

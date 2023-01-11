@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 22:28:25 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:27:40 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "libft.h"
 
 # define MAX_PHILO 200
-# define NONE -1
+# define STOP_WRITE -1
 # define TAKEN_A_FORK_STR "has taken a fork"
 # define EATING_STR "is eating"
 # define SLEEPING_STR "is sleeping"

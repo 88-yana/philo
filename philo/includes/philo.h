@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/11 15:27:40 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:54:18 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_philo
 {
 	pthread_t		thd;
 	int				id;
-	int				max_eat;
+	int				times_to_eat;
 	int				last_eat_time;
 	t_status		status;
 	pthread_mutex_t	*left;
@@ -55,7 +55,7 @@ typedef struct s_args
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	time_to_die;
-	int	max_eat;
+	int	times_must_eat;
 }	t_args;
 
 struct s_vars

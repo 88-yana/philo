@@ -6,19 +6,19 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/11 15:50:46 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:34:56 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static bool	find_death(t_vars *vars, t_philo *philo)
+static bool	find_death(t_vars *vars, t_philo *philo) //go_on 使えば綺麗になる
 {
 	int	timestamp;
 
 	pthread_mutex_lock(&philo->vars->mtx_time);
 	timestamp = get_timestamp(vars->start_time);
-	if (timestamp > vars->args.time_to_die + philo->last_eat_time)
+	if (is_dead(timestamp, philo->last_eat_time, vars->args.time_to_die))
 	{
 		pthread_mutex_unlock(&philo->vars->mtx_time);
 		vars->stop = true;

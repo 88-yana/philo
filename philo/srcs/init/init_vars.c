@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 22:33:21 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:39:00 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	init_args(t_vars *vars, int argc, char **argv)
 	vars->args.time_to_eat = ft_atoi(argv[3]);
 	vars->args.time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		vars->args.max_eat = ft_atoi(argv[5]);
+		vars->args.times_must_eat = ft_atoi(argv[5]);
 	else
-		vars->args.max_eat = INT_MAX;
+		vars->args.times_must_eat = INT_MAX;
 }
 
 static void	init_forks(t_vars *vars)
@@ -40,26 +40,28 @@ static void	init_philos(t_vars *vars)
 {
 	int	i;
 	int	num_of_philos;
+	t_philo	*philo;
 
 	num_of_philos = vars->args.num_of_philos;
 	i = 0;
 	while (i < num_of_philos)
 	{
-		vars->philos[i].id = i + 1;
-		vars->philos[i].max_eat = vars->args.max_eat;
-		vars->philos[i].last_eat_time = 0;
-		if (vars->args.max_eat == 0 || vars->philos[i].id == num_of_philos)
-			vars->philos[i].status = THINKING_E;
-		else if (vars->philos[i].id % 2 == 1)
-			vars->philos[i].status = EATING_E;
+		philo = &vars->philos[i];
+		philo->id = i + 1;
+		philo->times_to_eat = 0;
+		philo->last_eat_time = 0;
+		if (philo->id == num_of_philos)
+			philo->status = THINKING_E;
+		else if (philo->id % 2 == 0)
+			philo->status = THINKING_E;
 		else
-			vars->philos[i].status = THINKING_E;
-		vars->philos[i].left = &vars->mtx_forks[i];
+			philo->status = EATING_E;
+		philo->left = &vars->mtx_forks[i];
 		if (i == 0)
-			vars->philos[i].right = &vars->mtx_forks[num_of_philos - 1];
+			philo->right = &vars->mtx_forks[num_of_philos - 1];
 		else
-			vars->philos[i].right = &vars->mtx_forks[i - 1];
-		vars->philos[i].vars = vars;
+			philo->right = &vars->mtx_forks[i - 1];
+		philo->vars = vars;
 		i++;
 	}
 }

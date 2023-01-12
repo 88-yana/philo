@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 16:40:04 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:34:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ bool	check_args(int argc, char **argv)
 	if (ft_atoi(argv[1]) < 1 || 200 < ft_atoi(argv[1]))
 	{
 		printf("there are too many philos or less than 1\n");
+		return (false);
+	}
+	if (argc == 6 && ft_atoi(argv[5]) == 0)
+	{
+		printf("cannot start simulation\n");
 		return (false);
 	}
 	return (true);

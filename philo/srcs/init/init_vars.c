@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 18:39:00 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:41:56 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,17 @@ static void	init_forks(t_vars *vars)
 
 static void	init_philos(t_vars *vars)
 {
-	int	i;
-	int	num_of_philos;
+	int		i;
 	t_philo	*philo;
 
-	num_of_philos = vars->args.num_of_philos;
 	i = 0;
-	while (i < num_of_philos)
+	while (i < vars->args.num_of_philos)
 	{
 		philo = &vars->philos[i];
 		philo->id = i + 1;
 		philo->times_to_eat = 0;
 		philo->last_eat_time = 0;
-		if (philo->id == num_of_philos)
+		if (philo->id == vars->args.num_of_philos)
 			philo->status = THINKING_E;
 		else if (philo->id % 2 == 0)
 			philo->status = THINKING_E;
@@ -58,7 +56,7 @@ static void	init_philos(t_vars *vars)
 			philo->status = EATING_E;
 		philo->left = &vars->mtx_forks[i];
 		if (i == 0)
-			philo->right = &vars->mtx_forks[num_of_philos - 1];
+			philo->right = &vars->mtx_forks[vars->args.num_of_philos - 1];
 		else
 			philo->right = &vars->mtx_forks[i - 1];
 		philo->vars = vars;

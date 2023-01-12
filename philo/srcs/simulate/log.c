@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/11 15:50:43 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:23:17 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 {
+	bool	go_on;
+
+	go_on = true;
+	lock_mutex(NULL, philo->vars, STOP_WRITE);
 	if (vars->stop)
-		return (false);
+		go_on = false;
 	else if (is_dead(timestamp, philo->last_eat_time, vars->args.time_to_die))
 	{
 		vars->stop = true;
-		usleep(5000);
 		printf("%d %d %s\n", timestamp, philo->id, DIED_STR);
-		return (false);
+		go_on = false;
 	}
 	else if (type == EATING_E)
 	{
@@ -33,5 +36,6 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 		printf("%d %d %s\n", timestamp, philo->id, SLEEPING_STR);
 	else if (type == THINKING_E)
 		printf("%d %d %s\n", timestamp, philo->id, THINKING_STR);
-	return (true);
+	unlock_mutex(NULL, philo->vars, STOP_WRITE);
+	return (go_on);
 }

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 01:32:57 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/09 05:26:23 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:26:17 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_timestamp(int start_time)
 	return (timestamp);
 }
 
-void	stop_while_eating(int timestamp, t_philo *philo, int time_to_do)
+void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do)
 {
 	int	until_time;
 

@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/11 20:54:18 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:26:27 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
 void	*monitor_act(void *arg);
 void	*philo_act(void *arg);
 int		get_timestamp(int start_time);
-void	stop_while_eating(int timestamp, t_philo *philo, int time_to_do);
+void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
 
 bool	is_dead(int timestamp, int last_eat_time, int time_to_die);
 bool	can_eat(t_philo *philo);

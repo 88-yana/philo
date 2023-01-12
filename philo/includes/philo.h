@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 19:26:27 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:45:55 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_philo
 	pthread_t		thd;
 	int				id;
 	int				times_to_eat;
-	int				last_eat_time;
+	int				last_eat_at;
 	t_status		status;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
@@ -52,9 +52,9 @@ typedef struct s_philo
 typedef struct s_args
 {
 	int	num_of_philos;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	time_to_die;
+	int	time_eat;
+	int	time_sleep;
+	int	time_die;
 	int	times_must_eat;
 }	t_args;
 
@@ -80,7 +80,7 @@ void	*philo_act(void *arg);
 int		get_timestamp(int start_time);
 void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
 
-bool	is_dead(int timestamp, int last_eat_time, int time_to_die);
+bool	is_dead(int timestamp, int last_eat_time, int time_to_die, t_vars *vars);
 bool	can_eat(t_philo *philo);
 void	lock_mutex(t_philo *philo, t_vars *vars, t_status type);
 void	unlock_mutex(t_philo *philo, t_vars *vars, t_status type);

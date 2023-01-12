@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 18:41:56 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:46:21 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	init_args(t_vars *vars, int argc, char **argv)
 {
 	vars->args.num_of_philos = ft_atoi(argv[1]);
-	vars->args.time_to_die = ft_atoi(argv[2]);
-	vars->args.time_to_eat = ft_atoi(argv[3]);
-	vars->args.time_to_sleep = ft_atoi(argv[4]);
+	vars->args.time_die = ft_atoi(argv[2]);
+	vars->args.time_eat = ft_atoi(argv[3]);
+	vars->args.time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		vars->args.times_must_eat = ft_atoi(argv[5]);
 	else
@@ -47,7 +47,7 @@ static void	init_philos(t_vars *vars)
 		philo = &vars->philos[i];
 		philo->id = i + 1;
 		philo->times_to_eat = 0;
-		philo->last_eat_time = 0;
+		philo->last_eat_at = 0;
 		if (philo->id == vars->args.num_of_philos)
 			philo->status = THINKING_E;
 		else if (philo->id % 2 == 0)

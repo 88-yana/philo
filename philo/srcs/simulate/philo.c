@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 19:26:05 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:46:57 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static bool	eating(t_philo *philo)
 	if (go_on)
 	{
 		pthread_mutex_lock(&philo->vars->mtx_time);
-		philo->last_eat_time = timestamp;
+		philo->last_eat_at = timestamp;
 		philo->times_to_eat++;
 		pthread_mutex_unlock(&philo->vars->mtx_time);
-		stop_while_doing(timestamp, philo, philo->vars->args.time_to_eat);
+		stop_while_doing(timestamp, philo, philo->vars->args.time_eat);
 	}
 	unlock_mutex(philo, philo->vars, EATING_E);
 	philo->status = SLEEPING_E;
@@ -43,7 +43,7 @@ static bool	sleeping(t_philo *philo)
 	timestamp = get_timestamp(philo->vars->start_time);
 	go_on = log_manager(timestamp, philo, philo->vars, SLEEPING_E);
 	if (go_on)
-		stop_while_doing(timestamp, philo, philo->vars->args.time_to_sleep);
+		stop_while_doing(timestamp, philo, philo->vars->args.time_sleep);
 	philo->status = THINKING_E;
 	return (go_on);
 }

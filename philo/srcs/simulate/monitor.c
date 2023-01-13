@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 06:42:14 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 06:47:31 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static bool	find_death(t_vars *vars, t_philo *philo) //go_on 使えば綺麗に�
 		pthread_mutex_unlock(&vars->mtx_write);
 		return (true);
 	}
-	pthread_mutex_unlock(&vars->mtx_time);
-	(void) philo;
 	pthread_mutex_unlock(&vars->mtx_stop);
 	return (false);
 }

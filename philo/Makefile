@@ -7,10 +7,10 @@ SRCS = srcs/init/check_args.c \
 	srcs/lib/ft_atoi.c \
 	srcs/lib/ft_isdigit.c \
 	srcs/lib/ft_strlen.c \
-	srcs/main/main.c \
 	srcs/simulate/monitor.c \
 	srcs/simulate/philo.c \
-	srcs/simulate/utils.c
+	srcs/simulate/utils.c \
+	srcs/main.c
 
 OBJS = $(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)
 NAME = philo

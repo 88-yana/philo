@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:25:17 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 08:13:47 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ static bool	eating(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->vars->mtx_time);
 		philo->last_eat_time = timestamp;
-		philo->times_to_eat++;
 		pthread_mutex_unlock(&philo->vars->mtx_time);
 		stop_while_doing(timestamp, philo, philo->vars->args.time_to_eat);
+		pthread_mutex_lock(&philo->vars->mtx_time);
+		philo->times_to_eat++;
+		pthread_mutex_unlock(&philo->vars->mtx_time);
 	}
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);

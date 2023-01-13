@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I ./includes/
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -I ./includes/
 SRCSDIR = srcs
 OBJSDIR = objs
 SRCS = srcs/init/check_args.c \
@@ -8,10 +8,8 @@ SRCS = srcs/init/check_args.c \
 	srcs/lib/ft_isdigit.c \
 	srcs/lib/ft_strlen.c \
 	srcs/main/main.c \
-	srcs/simulate/log.c \
 	srcs/simulate/monitor.c \
 	srcs/simulate/philo.c \
-	srcs/simulate/time.c \
 	srcs/simulate/utils.c
 
 OBJS = $(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)

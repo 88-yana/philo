@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:20:19 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 07:31:32 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,13 @@ struct s_vars
 bool	check_args(int argc, char **argv);
 void	init_vars(t_vars *vars, int argc, char **argv);
 
-bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
-
 void	*monitor_act(void *arg);
 
 void	*philo_act(void *arg);
 
+bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
 int		get_timestamp(int start_time);
 void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
-
 bool	is_dead(int timestamp, t_philo *philo, t_vars *vars);
-void	lock_mutex(t_philo *philo, t_vars *vars, t_status type);
-void	unlock_mutex(t_philo *philo, t_vars *vars, t_status type);
 
 #endif

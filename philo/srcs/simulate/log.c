@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 19:44:57 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 06:41:22 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 	lock_mutex(NULL, philo->vars, STOP_WRITE);
 	if (vars->stop)
 		go_on = false;
-	else if (is_dead(timestamp, philo->last_eat_at, vars->args.time_die, vars))
+	else if (is_dead(timestamp, philo, vars))
 	{
 		vars->stop = true;
 		printf("%d %d %s\n", timestamp, philo->id, DIED_STR);

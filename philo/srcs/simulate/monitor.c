@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/13 00:23:36 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 06:42:14 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static bool	find_death(t_vars *vars, t_philo *philo) //go_on 使えば綺麗に�
 {
 	int	timestamp;
 
+	pthread_mutex_lock(&vars->mtx_stop);
 	timestamp = get_timestamp(vars->start_time);
-	if (is_dead(timestamp, philo->last_eat_at, vars->args.time_die, vars))
+	if (is_dead(timestamp, philo, vars))
 	{
 		vars->stop = true;
 		pthread_mutex_unlock(&vars->mtx_stop);
@@ -26,58 +27,36 @@ static bool	find_death(t_vars *vars, t_philo *philo) //go_on 使えば綺麗に�
 		pthread_mutex_unlock(&vars->mtx_write);
 		return (true);
 	}
+	pthread_mutex_unlock(&vars->mtx_time);
+	(void) philo;
+	pthread_mutex_unlock(&vars->mtx_stop);
 	return (false);
-}
-
-static bool	death_detector(t_vars *vars)
-{
-	int		i;
-	bool	all_philos_over_eat;
-
-	all_philos_over_eat = true;
-	i = 0;
-	while (i < vars->args.num_of_philos) //TODO:break とか使えば，mutexが綺麗になるかも
-	{
-		pthread_mutex_lock(&vars->mtx_stop);
-		if (vars->stop)
-		{
-			pthread_mutex_unlock(&vars->mtx_stop);
-			return (false);
-		}
-		else if (find_death(vars, &vars->philos[i]))
-			return (false);
-		pthread_mutex_lock(&vars->mtx_time);
-		if (vars->philos[i].times_to_eat < vars->args.times_must_eat)
-			all_philos_over_eat = false;
-		pthread_mutex_lock(&vars->mtx_time);
-		pthread_mutex_unlock(&vars->mtx_stop);
-		i++;
-	}
-	if (all_philos_over_eat)
-	{
-		pthread_mutex_lock(&vars->mtx_stop);
-		vars->stop = true;
-		pthread_mutex_unlock(&vars->mtx_stop);
-		return (false);
-	}
-	return (true);
 }
 
 void	*monitor_act(void *arg)
 {
 	t_vars	*vars;
 	int		i;
+	bool	all_philos_over_must_eat;
 
 	vars = (t_vars *)arg;
 	i = 0;
 	while (1)
 	{
-		pthread_mutex_lock(&vars->mtx_stop);
+		if (i == 0)
+			all_philos_over_must_eat = true;
 		if (find_death(vars, &vars->philos[i]))
 			break ;
-		else if (is_all_have_eaten())
-			break ;
+		pthread_mutex_lock(&vars->mtx_time);
+		if (vars->philos[i].times_to_eat < vars->args.times_must_eat)
+			all_philos_over_must_eat = false;
+		pthread_mutex_unlock(&vars->mtx_time);
 		i = (i + 1) % vars->args.num_of_philos;
+		if (i == 0 && all_philos_over_must_eat)
+			break ;
 	}
+	pthread_mutex_lock(&vars->mtx_stop);
+	vars->stop = true;
+	pthread_mutex_unlock(&vars->mtx_stop);
 	return (NULL);
 }

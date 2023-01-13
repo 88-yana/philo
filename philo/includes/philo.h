@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 19:45:55 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 06:40:41 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	*philo_act(void *arg);
 int		get_timestamp(int start_time);
 void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
 
-bool	is_dead(int timestamp, int last_eat_time, int time_to_die, t_vars *vars);
+bool	is_dead(int timestamp, t_philo *philo, t_vars *vars);
 bool	can_eat(t_philo *philo);
 void	lock_mutex(t_philo *philo, t_vars *vars, t_status type);
 void	unlock_mutex(t_philo *philo, t_vars *vars, t_status type);

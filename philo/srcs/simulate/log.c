@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:02:36 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 07:03:44 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 	bool	go_on;
 
 	go_on = true;
-	// lock_mutex(NULL, philo->vars, STOP_WRITE);
 	pthread_mutex_lock(&vars->mtx_stop);
 	if (vars->stop)
 		go_on = false;
@@ -38,6 +37,5 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 	else if (type == THINKING_E)
 		printf("%d %d %s\n", timestamp, philo->id, THINKING_STR);
 	pthread_mutex_unlock(&vars->mtx_stop);
-	// unlock_mutex(NULL, philo->vars, STOP_WRITE);
 	return (go_on);
 }

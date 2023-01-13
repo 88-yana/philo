@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 06:50:23 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 07:20:19 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ struct s_vars
 	pthread_t		monitor;
 	pthread_mutex_t	mtx_forks[MAX_PHILO];
 	pthread_mutex_t	mtx_time;
-	pthread_mutex_t	mtx_write;
 	pthread_mutex_t	mtx_stop;
 };
 
@@ -75,13 +74,15 @@ bool	check_args(int argc, char **argv);
 void	init_vars(t_vars *vars, int argc, char **argv);
 
 bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
+
 void	*monitor_act(void *arg);
+
 void	*philo_act(void *arg);
+
 int		get_timestamp(int start_time);
 void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
 
 bool	is_dead(int timestamp, t_philo *philo, t_vars *vars);
-bool	can_eat(t_philo *philo);
 void	lock_mutex(t_philo *philo, t_vars *vars, t_status type);
 void	unlock_mutex(t_philo *philo, t_vars *vars, t_status type);
 

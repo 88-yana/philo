@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 06:51:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/14 07:14:00 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	init_vars(t_vars *vars, int argc, char **argv)
 	init_args(vars, argc, argv);
 	init_forks(vars);
 	init_philos(vars);
-	pthread_mutex_init(&vars->mtx_write, NULL);
 	pthread_mutex_init(&vars->mtx_stop, NULL);
 	pthread_mutex_init(&vars->mtx_time, NULL);
 	gettimeofday(&now_time, NULL);

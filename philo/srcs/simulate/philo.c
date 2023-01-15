@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 08:13:47 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/16 04:46:58 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	eating(t_philo *philo)
 	pthread_mutex_lock(philo->left);
 	pthread_mutex_lock(philo->right);
 	timestamp = get_timestamp(philo->vars->start_time);
-	go_on = log_manager(timestamp, philo, philo->vars, EATING_E);
+	go_on = log_manager(timestamp, philo, philo->vars, EATING_STR);
 	if (go_on)
 	{
 		pthread_mutex_lock(&philo->vars->mtx_time);
@@ -34,7 +34,6 @@ static bool	eating(t_philo *philo)
 	}
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
-	philo->status = SLEEPING_E;
 	return (go_on);
 }
 
@@ -45,10 +44,9 @@ static bool	sleeping(t_philo *philo)
 
 	go_on = true;
 	timestamp = get_timestamp(philo->vars->start_time);
-	go_on = log_manager(timestamp, philo, philo->vars, SLEEPING_E);
+	go_on = log_manager(timestamp, philo, philo->vars, SLEEPING_STR);
 	if (go_on)
 		stop_while_doing(timestamp, philo, philo->vars->args.time_to_sleep);
-	philo->status = THINKING_E;
 	return (go_on);
 }
 
@@ -59,8 +57,7 @@ static bool	thinking(t_philo *philo)
 
 	go_on = true;
 	timestamp = get_timestamp(philo->vars->start_time);
-	go_on = log_manager(timestamp, philo, philo->vars, THINKING_E);
-	philo->status = EATING_E;
+	go_on = log_manager(timestamp, philo, philo->vars, THINKING_STR);
 	return (go_on);
 }
 
@@ -77,17 +74,17 @@ void	*philo_act(void *arg)
 		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 == 0 || philo->id == philo->vars->args.num_of_philos)
+	{
+		thinking(philo);
 		usleep(100);
+	}
 	go_on = true;
 	while (go_on)
 	{
-		if (philo->status == EATING_E)
-			go_on = eating(philo);
-		else if (philo->status == SLEEPING_E)
-			go_on = sleeping(philo);
-		else if (philo->status == THINKING_E)
-			go_on = thinking(philo);
+		go_on = eating(philo);
+		go_on = sleeping(philo);
+		go_on = thinking(philo);
 	}
 	return (NULL);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:27:34 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/16 04:46:42 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
+bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, char *type)
 {
 	bool	go_on;
 
@@ -26,16 +26,14 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type)
 		printf("%d %d %s\n", timestamp, philo->id, DIED_STR);
 		go_on = false;
 	}
-	else if (type == EATING_E)
+	else if (type == EATING_STR)
 	{
 		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 		printf("%d %d %s\n", timestamp, philo->id, EATING_STR);
 	}
-	else if (type == SLEEPING_E)
-		printf("%d %d %s\n", timestamp, philo->id, SLEEPING_STR);
-	else if (type == THINKING_E)
-		printf("%d %d %s\n", timestamp, philo->id, THINKING_STR);
+	else
+		printf("%d %d %s\n", timestamp, philo->id, type);
 	pthread_mutex_unlock(&vars->mtx_stop);
 	return (go_on);
 }

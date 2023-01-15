@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:44:51 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/16 04:48:18 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,12 @@
 
 typedef struct s_vars	t_vars;
 
-typedef enum e_status
-{
-	EATING_E,
-	SLEEPING_E,
-	THINKING_E
-}	t_status;
-
 typedef struct s_philo
 {
 	pthread_t		thd;
 	int				id;
 	int				times_to_eat;
 	int				last_eat_time;
-	t_status		status;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	t_vars			*vars;
@@ -76,7 +68,7 @@ void	*monitor_act(void *arg);
 
 void	*philo_act(void *arg);
 
-bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, t_status type);
+bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, char *type);
 int		get_timestamp(int start_time);
 void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
 bool	is_dead(int timestamp, t_philo *philo, t_vars *vars);

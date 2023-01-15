@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:14:00 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/01/16 04:22:14 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ static void	init_philos(t_vars *vars)
 		philo->id = i + 1;
 		philo->times_to_eat = 0;
 		philo->last_eat_time = 0;
-		if (philo->id == vars->args.num_of_philos)
-			philo->status = THINKING_E;
-		else if (philo->id % 2 == 0)
-			philo->status = THINKING_E;
-		else
-			philo->status = EATING_E;
 		philo->left = &vars->mtx_forks[i];
 		if (i == 0)
 			philo->right = &vars->mtx_forks[vars->args.num_of_philos - 1];

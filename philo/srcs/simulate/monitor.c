@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 14:56:49 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:16:59 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static bool	find_death(t_vars *vars, t_philo *philo)
 	find = false;
 	pthread_mutex_lock(&vars->mtx_stop);
 	timestamp = get_timestamp(vars->start_time);
-	if (is_dead(timestamp, philo, vars))
+	if (vars->stop)
+		find = true;
+	else if (is_dead(timestamp, philo, vars))
 	{
 		vars->stop = true;
 		printf("%d %d %s\n", timestamp, philo->id, DIED_STR);

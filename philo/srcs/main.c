@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:23:24 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/14 07:14:16 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:02:06 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	destroy_mutexes(t_vars *vars)
 	while (i < vars->args.num_of_philos)
 	{
 		pthread_mutex_destroy(&vars->mtx_forks[i]);
+		pthread_mutex_destroy(&((vars->philos)[i].mtx_time));
 		i++;
 	}
 	pthread_mutex_destroy(&vars->mtx_stop);
-	pthread_mutex_destroy(&vars->mtx_time);
 }
 
 int	main(int argc, char **argv)

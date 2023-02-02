@@ -1,5 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -I ./includes/
+# CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -I ./includes/
 SRCSDIR = srcs
 OBJSDIR = objs
 SRCS = srcs/init/check_args.c \

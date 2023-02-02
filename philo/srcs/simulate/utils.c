@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/16 04:46:42 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:57:40 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do)
 
 bool	is_dead(int timestamp, t_philo *philo, t_vars *vars)
 {
-	pthread_mutex_lock(&vars->mtx_time);
+	pthread_mutex_lock(&philo->mtx_time);
 	if (timestamp - philo->last_eat_time > vars->args.time_to_die)
 	{
-		pthread_mutex_unlock(&vars->mtx_time);
+		pthread_mutex_unlock(&philo->mtx_time);
 		return (true);
 	}
-	pthread_mutex_unlock(&vars->mtx_time);
+	pthread_mutex_unlock(&philo->mtx_time);
 	return (false);
 }

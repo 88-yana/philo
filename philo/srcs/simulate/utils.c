@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 14:57:40 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:36:57 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, char *type)
 		go_on = false;
 	}
 	else if (type == EATING_STR)
-	{
-		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
-		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 		printf("%d %d %s\n", timestamp, philo->id, EATING_STR);
-	}
+	else if (type == TAKEN_A_FORK_STR)
+		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 	else
 		printf("%d %d %s\n", timestamp, philo->id, type);
 	pthread_mutex_unlock(&vars->mtx_stop);

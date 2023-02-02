@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 14:49:58 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:51:08 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ static void	init_philos(t_vars *vars)
 		philo->last_eat_time = 0;
 		pthread_mutex_init(&philo->mtx_time, NULL);
 		philo->left = &vars->mtx_forks[i];
-		if (i == 0)
-			philo->right = &vars->mtx_forks[vars->args.num_of_philos - 1];
-		else
-			philo->right = &vars->mtx_forks[i - 1];
+		philo->right = &vars->mtx_forks[(i + 1) % vars->args.num_of_philos];
 		philo->vars = vars;
 		i++;
 	}

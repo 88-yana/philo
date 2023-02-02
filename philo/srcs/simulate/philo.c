@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 14:46:07 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:51:03 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static bool	eating(t_philo *philo)
 
 	go_on = true;
 	pthread_mutex_lock(philo->left);
+	timestamp = get_timestamp(philo->vars->start_time);
+	log_manager(timestamp, philo, philo->vars, TAKEN_A_FORK_STR);
 	pthread_mutex_lock(philo->right);
 	timestamp = get_timestamp(philo->vars->start_time);
+	log_manager(timestamp, philo, philo->vars, TAKEN_A_FORK_STR);
 	go_on = log_manager(timestamp, philo, philo->vars, EATING_STR);
 	if (go_on)
 	{
@@ -74,7 +77,7 @@ void	*philo_act(void *arg)
 		printf("%d %d %s\n", timestamp, philo->id, TAKEN_A_FORK_STR);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0 || philo->id == philo->vars->args.num_of_philos)
+	if (philo->id % 2 == 0)
 	{
 		thinking(philo);
 		usleep(100);

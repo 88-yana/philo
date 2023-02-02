@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:40:30 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/01/12 18:34:03 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:00:27 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	check_args(int argc, char **argv)
 		printf("args: num_of_philos die eat sleep (times_of_eating)\n");
 		return (false);
 	}
-	if (is_valid_number(argv, 1) == false)
+	if (!is_valid_number(argv, 1))
 	{
 		printf("args are invalid\n");
 		return (false);

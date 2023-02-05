@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 15:05:33 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 14:45:01 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:33:27 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*monitor_act(void *arg);
 
 void	*philo_act(void *arg);
 
-bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, char *type);
+bool	log_manager(t_philo *philo, t_vars *vars, char *type);
 int		get_timestamp(int start_time);
 void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do);
 bool	is_dead(int timestamp, t_philo *philo, t_vars *vars);

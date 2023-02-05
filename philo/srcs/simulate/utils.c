@@ -6,18 +6,20 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 15:36:57 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:30:57 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	log_manager(int timestamp, t_philo *philo, t_vars *vars, char *type)
+bool	log_manager(t_philo *philo, t_vars *vars, char *type)
 {
 	bool	go_on;
+	int		timestamp;
 
 	go_on = true;
 	pthread_mutex_lock(&vars->mtx_stop);
+	timestamp = get_timestamp(philo->vars->start_time);
 	if (vars->stop)
 		go_on = false;
 	else if (is_dead(timestamp, philo, vars))

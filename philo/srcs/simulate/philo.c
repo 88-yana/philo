@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:39:49 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/05 10:32:49 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:27:05 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	*philo_act(void *arg)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
+	{
 		thinking(philo);
+		usleep(100);
+	}
 	go_on = true;
 	while (go_on)
 	{

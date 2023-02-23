@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:15:58 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/05 10:30:57 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:45:21 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	stop_while_doing(int timestamp, t_philo *philo, int time_to_do)
 	int	until_time;
 
 	until_time = timestamp + time_to_do;
+	usleep(time_to_do - 200);
 	while (get_timestamp(philo->vars->start_time) < until_time)
 		usleep(100);
 }

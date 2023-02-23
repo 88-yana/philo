@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:50:55 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/05 10:59:35 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:58:34 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	init_philos(t_vars *vars)
 		philo->id = i + 1;
 		philo->times_to_eat = 0;
 		philo->last_eat_time = 0;
-		pthread_mutex_init(&philo->mtx_time, NULL);
 		if (philo->id == vars->args.num_of_philos)
 		{
 			philo->left = &vars->mtx_forks[0];
@@ -72,6 +71,7 @@ void	init_vars(t_vars *vars, int argc, char **argv)
 	init_forks(vars);
 	init_philos(vars);
 	pthread_mutex_init(&vars->mtx_stop, NULL);
+	pthread_mutex_init(&vars->mtx_time, NULL);
 	gettimeofday(&now_time, NULL);
 	vars->start_time = 1000 * now_time.tv_sec + now_time.tv_usec / 1000;
 	vars->stop = false;

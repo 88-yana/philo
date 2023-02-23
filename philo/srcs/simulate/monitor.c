@@ -6,7 +6,7 @@
 /*   By: hyanagim <hyanagim@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:41:07 by hyanagim          #+#    #+#             */
-/*   Updated: 2023/02/02 15:34:33 by hyanagim         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:23:59 by hyanagim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	*monitor_act(void *arg)
 			all_philos_over_must_eat = true;
 		if (find_death(vars, &vars->philos[i]))
 			break ;
-		pthread_mutex_lock(&(vars->philos[i].mtx_time));
+		pthread_mutex_lock(&vars->mtx_time);
 		if (vars->philos[i].times_to_eat < vars->args.times_must_eat)
 			all_philos_over_must_eat = false;
-		pthread_mutex_unlock(&(vars->philos[i].mtx_time));
+		pthread_mutex_unlock(&vars->mtx_time);
 		i = (i + 1) % vars->args.num_of_philos;
 		if (i == 0 && all_philos_over_must_eat)
 			break ;
